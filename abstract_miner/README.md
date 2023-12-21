@@ -3,7 +3,7 @@
 Run locally:
 
 ```console
-git clone 
+git clone https://github.com/ibotsuft/scripts.git --branch main --single-branch abstract_miner
 ```
 
 Create a virtual environment:
