@@ -1,45 +1,63 @@
-import subprocess
+import sys
 import threading
-import time
+import subprocess
 import pyautogui
+import signal
+import time
+import os
 
-class GameAutomator:
-    def __init__(self):
-        self.num_games = 5  # Número de jogos que você deseja executar simultaneamente
-        self.num_iterations = 20  # Número de iterações desejadas
-        self.games = []
+iteration = 0
+process = None
 
-    def start_game(self, game_id):
-        for iteration in range(self.num_iterations):
-            print(f"Starting game {game_id}, iteration {iteration + 1}")
-            # Adicione a lógica específica para iniciar o jogo aqui
-            # Certifique-se de iniciar o servidor, o monitor e as equipes conforme necessário
+def startGame():
+    
+    global process
+    global iteration
 
-            time.sleep(3)
-            print(f'Connecting to game {game_id} now')
-            pyautogui.hotkey('ctrl', 'c', interval=0.1)
-            time.sleep(5)
-            print(f'Starting game {game_id} now')
-            pyautogui.hotkey('ctrl', 'k', interval=0.1)
-            time.sleep(420)
-            print(f'I believe the first half of game {game_id} ended now. Starting again.')
-            pyautogui.hotkey('ctrl', 'k', interval=0.1)
-            time.sleep(450)
+    iteration = iteration + 1
+        
+    def killGame():
+        print('I believe the game is over. Killing process.')
+        pgrp = os.getpgid(process.pid)
+        try:
+            os.killpg(pgrp, signal.SIGINT)
+        except Exception as e:
+            return
+        return
+    
+    def startGame():
+        global process
+        global iteration
+        ourTeamName = f"iBots_Dev_{iteration}"
+        theirTeamName = f"RoboCin_{iteration}"
+        bash = ['bash', 'quickStartGame.sh', ourTeamName, theirTeamName]
+        dir = '/home/kali/ibots/scripts/automatedTests/'
+        process = subprocess.Popen(bash, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=dir)
+        process.communicate()
 
-    def run_game(self, game_id):
-        while True:
-            self.start_game(game_id)
+        return
 
-    def run_game_loop(self):
-        for game_id in range(self.num_games):
-            command = ["sh", "quickStartGame.sh"]  # Substitua isso pelo comando correto para executar o seu script shell
-            game_thread = threading.Thread(target=self.run_game, name=str(game_id), args=(command,))
-            self.games.append(game_thread)
-            game_thread.start()
+    thread = threading.Thread(target=startGame)
+    thread.start()
 
-        for game_thread in self.games:
-            game_thread.join()
+    time.sleep(3)
+    print('Connecting now')
+    pyautogui.hotkey('ctrl', 'c', interval=0.1)
+    time.sleep(5)
+    print('Starting now')
+    pyautogui.hotkey('ctrl', 'k', interval=0.1)
+    time.sleep(420)
+    print('I believe the first half ended now. Starting again.')
+    pyautogui.hotkey('ctrl', 'k', interval=0.1)
+    time.sleep(450)
+    killGame()
+    thread.join()
 
-if __name__ == "__main__":
-    game_automator = GameAutomator()
-    game_automator.run_game_loop()
+while True:
+    if iteration == 15:
+        print('End of execution')
+        exit()
+    print("Iteration:", iteration)
+    startGame()
+    
+
