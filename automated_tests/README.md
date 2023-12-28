@@ -1,11 +1,13 @@
-# PDF Abstract Extractor
+# Automated Tests
 
-This script will iterate all files from a directory and extract the Abstract section to a txt file.
+This program will run RoboCup Soccer Simulation 2D League matches. You will need rcssserver, rcssmonitor and the teams installed in your computer. 
+
+Modify the specific shell files to adapt to your system.
 
 Run locally:
 
 ```console
-git clone https://github.com/ibotsuft/scripts.git --branch main --single-branch abstract_miner
+git clone https://github.com/ibotsuft/scripts.git --branch main --single-branch automated_tests
 ```
 
 Create a virtual environment:
