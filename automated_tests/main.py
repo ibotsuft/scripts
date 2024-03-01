@@ -6,7 +6,7 @@ import signal
 import time
 import os
 
-iteration = 0
+iteration = 15
 process = None
 
 def startGame():
@@ -29,9 +29,9 @@ def startGame():
         global process
         global iteration
         ourTeamName = f"iBots_Dev_{iteration}"
-        theirTeamName = f"RoboCin_{iteration}"
+        theirTeamName = f"HeliosBase_{iteration}"
         bash = ['bash', 'quickStartGame.sh', ourTeamName, theirTeamName]
-        dir = '/home/kali/ibots/scripts/automatedTests/'
+        dir = '/home/kali/ibots/scripts/automated_tests/'
         process = subprocess.Popen(bash, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=dir)
         process.communicate()
 
@@ -54,7 +54,7 @@ def startGame():
     thread.join()
 
 while True:
-    if iteration == 15:
+    if iteration == 20:
         print('End of execution')
         exit()
     print("Iteration:", iteration)
