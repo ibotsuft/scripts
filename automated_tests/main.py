@@ -6,7 +6,7 @@ import signal
 import time
 import os
 
-iteration = 15
+iteration = 0
 process = None
 
 def startGame():

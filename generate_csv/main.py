@@ -15,7 +15,7 @@ def list_rcg_files(dir):
 
     return rcg_files
 
-target_dir = "/home/kali/ibots/statsfile/iBots_x_HeliosBase_original_formation/rcg_rcl"
+target_dir = "/home/kali/ibots/statsfile/iBots_x_HeliosBase_541/rcg_rcl/"
 
 rcg_files = list_rcg_files(target_dir)
 

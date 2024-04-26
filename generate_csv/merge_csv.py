@@ -35,7 +35,7 @@ def merge_csv(path_folder, filename_output):
 
 
 if __name__ == "__main__":
-    folder = '/home/kali/ibots/statsfile/iBots_x_HeliosBase_original_formation/rcg_rcl'
-    file_output = 'iBots_x_HeliosBase_original'
+    folder = '/home/kali/ibots/statsfile/iBots_x_HeliosBase_541/rcg_rcl/'
+    file_output = 'iBots_x_HeliosBase_541.csv'
 
     merge_csv(folder, file_output)
