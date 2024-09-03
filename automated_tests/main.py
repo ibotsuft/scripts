@@ -54,7 +54,7 @@ def startGame():
     thread.join()
 
 while True:
-    if iteration == 20:
+    if iteration == 10:
         print('End of execution')
         exit()
     print("Iteration:", iteration)
