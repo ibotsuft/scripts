@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd "/home/kali/ibots/ibots/src/"
-./start.sh &>> /home/kali/ibots/statsfile/terminal/${1}.txt -t ${1}
+cd "/home/epic/ibots/ibots/src/"
+./start.sh &>> /home/epic/ibots/statsfile/terminal/${1}.txt -t ${1}

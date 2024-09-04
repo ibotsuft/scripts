@@ -31,7 +31,7 @@ def startGame():
         ourTeamName = f"iBots_Dev_{iteration}"
         theirTeamName = f"HeliosBase_{iteration}"
         bash = ['bash', 'quickStartGame.sh', ourTeamName, theirTeamName]
-        dir = '/home/kali/ibots/scripts/automated_tests/'
+        dir = '/home/epic/ibots/scripts/automated_tests/'
         process = subprocess.Popen(bash, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=dir)
         process.communicate()
 
@@ -54,7 +54,7 @@ def startGame():
     thread.join()
 
 while True:
-    if iteration == 10:
+    if iteration == 150:
         print('End of execution')
         exit()
     print("Iteration:", iteration)
